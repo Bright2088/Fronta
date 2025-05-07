@@ -1,0 +1,51 @@
+{% load static %}
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static "base/css/navbar.css" %}">
+{% endblock extra_css %}
+<nav class="top-nav">
+  <!-- Logo -->
+  <a href="{% url 'home' %}" class="nav-logo">
+    <img
+      src="{% static 'base/images/logo.png' %}"
+      alt="Site Logo"
+      width="150px"
+    />
+  </a>
+
+  <!-- Search bar -->
+  <form action=" {% url 'home' %}" method="get" class="nav-search">
+    <input
+      type="text"
+      name="q"
+      placeholder="Search products..."
+      aria-label="Search products"
+    />
+    <button type="submit">Search</button>
+  </form>
+
+  <!-- Right-side links -->
+  <ul class="nav-links">
+    {% if user.is_authenticated %}
+      <li>Hello, {{ user.username }}</li> |
+      <li>
+        <form action="{% url 'logout' %}" method="post" style="display:inline;">
+          {% csrf_token %}
+          <button type="submit" style="background:none;border:none;color:blue;cursor:pointer;font:inherit;">
+            Logout
+          </button>
+        </form>
+      </li>
+    {% else %}
+      <li><a href="{% url 'login' %}">Sign In</a></li> |
+      <li><a href="{% url 'signup' %}">Sign Up</a></li>
+    {% endif %}
+    <li>
+      <a href="{% url 'cart_detail' %}" class="cart-link">
+        🛒
+        <span class="cart-count">{{ cart_item_count }}</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+

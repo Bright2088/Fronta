@@ -1,0 +1,26 @@
+{% extends "base/main.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'base/css/home.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+
+<style>
+.main div h1 {
+    color: #555;
+    text-align: center;
+}
+
+.main div {
+    margin-top: 5%;
+}
+</style>
+<div class="main">
+    <div>
+        <h1>Empty</h1>
+    </div>
+
+</div>
+{% endblock content %}

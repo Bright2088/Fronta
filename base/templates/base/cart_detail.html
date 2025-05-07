@@ -1,0 +1,35 @@
+{% extends "base/main.html" %}
+{% load static %}
+{% block extra_css %}
+ <link rel="stylesheet" href="{% static "base/css/cart_detail.css" %}">
+{% endblock extra_css %}
+{% block content %}
+<div class="container">
+    <a href="{% url 'home' %}">Go Back</a>
+    <h1>Cart Page</h1>
+
+    <div>
+        {% if cart %}
+            <ul>
+                {% for item in items %}
+                    <li>
+                        <strong>{{ item.product.name }}</strong><br>
+                        Quantity: {{ item.quantity }}<br>
+                        Unit Price: ${{ item.product.price }}<br>
+                        Subtotal: ${{ item.total_price }}<br>
+
+                        <form action="{% url 'remove_from_cart' item.product.id %}" method="POST" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit">Remove</button>
+                        </form>
+                    </li>
+                    <hr>
+                {% endfor %}
+            </ul>
+            <p><strong>Total:</strong> ${{ total }}</p>
+        {% else %}
+            <p>Your cart is empty.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

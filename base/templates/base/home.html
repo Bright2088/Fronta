@@ -1,0 +1,43 @@
+{% extends "base/main.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'base/css/home.css' %}">
+{% endblock extra_css %}
+
+{% block title %}Fronta | Home{% endblock title %}
+
+{% block content %}
+
+
+<section class="hero-banner">
+  <div>
+    <h1>Best Sells</h1>
+    <p>Quality Assurance</p>
+    <a href="#">View More</a>
+  </div>
+</section>
+<div class="container">
+  
+  {% for product in products %}
+    <div class="item">
+      {% if product.image %}
+        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+      {% else %}
+        <p>No image available</p>
+      {% endif %}
+      <p>{{ product.name }}</p>
+      <h5>${{ product.price }}</h5>
+      <a href="{% url 'product_detail' slug=product.slug %}">View</a>
+    </div>
+  {% endfor %}
+  
+</div>
+
+{% comment %} Mini banner after products {% endcomment %}
+<section class="min-banner">
+  <h3>Explore More Products</h3>
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos fugit quas earum</p>
+  <a href="#">View More</a>
+</section>
+{% endblock content %}

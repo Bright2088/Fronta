@@ -1,0 +1,36 @@
+{% extends "base/main.html" %}
+{% comment %} {% include "base/navbar.html" %} {% endcomment %}
+{% load static %} 
+{% block extra_css %}
+<link rel="stylesheet" href=" {% static 'base/css/category_detail.css' %}" />
+{% endblock extra_css %}
+{% block title %}Fronta | {{category.name}}{% endblock title %}
+
+{% block content %}
+<section class="products-section">
+    <div class="hero-banner">
+        <h1>{{category.name}}</h1>
+        <p>{{category.description}}</p>
+    </div>
+
+
+    <div class="products">
+        {% for product in products %}
+        <div >
+            <ul>
+                
+                <img src="{{product.image.url}}" alt="" width="300px">
+                <p>{{product.name}}</p>
+                <small>{{product.price}}</small>
+                <li>
+                    <a href="{% url 'product_detail' slug=product.slug %}">View Detail</a>
+                </li>
+                
+            </ul>
+        </div>
+        {%empty%}
+        <li>No products found in this category.</li>
+        {% endfor %}
+    </div>
+</section>
+{% endblock content %}
